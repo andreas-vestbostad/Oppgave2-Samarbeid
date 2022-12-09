@@ -26,7 +26,7 @@ with open(csv_fil, encoding="utf-8-sig") as fil:
 with open(json_fil, encoding="utf-8") as fil:
     innhold = json.load(fil)
 
-
+# henter data fra json fil og sorterer i variabler
 innhold_lengde = len(innhold["dataset"]["value"])
 kategorier = innhold["dataset"]["dimension"]["EkteskStatus"]["category"]["label"]
 innhold_per_kategori = innhold_lengde // len(kategorier)
@@ -40,7 +40,6 @@ x = list(innhold["dataset"]["dimension"]["Tid"]["category"]["index"].keys())
 aarstall  = [str(x) for x in aarstall]
 
 # Fyller inn verdier i årstall og innhold som "null" om årstall ikkje finnes i lista
-
 i = 0
 for year in list(range(int(min(x)),int(max(x)))):
     if x.count(year) <= 0:
@@ -60,8 +59,10 @@ for year in list(range(x[0],int(x[len(x)-1]))):
         befolkning.insert(i, None)
     i += 1
 
-# Tegner grafen
+# Git grafen ein predefined stil
+plt.style.use("seaborn")
 
+# Tegner grafen
 plt.plot(aarstall, befolkning)
 plt.plot(x, innhold_i_kategori[0])
 plt.plot(x, innhold_i_kategori[1])
@@ -77,7 +78,6 @@ plt.ylabel("Antall (millioner)")
 
 # Ordner slik at en ser kvar 10 verdi på x-aksen
 plt.xticks(np.arange(0, len(x)+1, 10), rotation = 75)
-plt.grid()
 
 # Viser grafen
 plt.show()
