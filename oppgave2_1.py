@@ -1,10 +1,10 @@
-#Importerer nødvendige bibliotek
+# Importerer nødvendige bibliotek
 import csv
 import matplotlib.pyplot as plt
 import numpy as np
 from pathlib import Path
 
-#Finner filen ved hjelp av pathlib
+# Finner filen ved hjelp av pathlib
 filnavn = Path(__file__).parent / "Befolkning.csv"
 
 # Lister for å ta vare på alle årstall og befolkningsstørrelser
@@ -18,17 +18,25 @@ with open(filnavn, encoding="utf-8-sig") as fil:
     tittel = next(filinnhold)
     #Hopper over andre linje i filen og legger til linjen i variabelen "overskrifter"
     overskrifter = next(filinnhold)
-    
+  
     #Loop som går gjennom hver line i filen og legger den første kolonnen til i "aarstall", og den andre kollenen til i "befolkning"
     for rad in filinnhold:
         aarstall.append(int(rad[0]))
         befolkning.append(int(rad[1]))
 
+# Git grafen ein predefined stil
+plt.style.use("seaborn")
+
 # Tegner grafen
 plt.plot(aarstall, befolkning)
+
+# Gir navn til tittlel og aksar
 plt.title(str(tittel[0]))
 plt.xlabel("Årstall")
 plt.ylabel("Befolking (millioner)")
+
+# Ordner slik y-aksen er meir oversiktlig
 plt.yticks(np.arange(0, max(befolkning), step=250000))
-plt.grid()
+
+# Vis grafen
 plt.show()
