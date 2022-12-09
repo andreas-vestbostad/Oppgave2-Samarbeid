@@ -36,6 +36,9 @@ for year in list(range(int(min(x)),int(max(x)))):
         data_in_categories[4].insert(i, None)
     i += 1
 
+#git grafen ein predefined stil
+plt.style.use("seaborn")
+
 #tegner grafen
 plt.plot(x, data_in_categories[0])
 plt.plot(x, data_in_categories[1])
