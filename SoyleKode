@@ -12,7 +12,7 @@ x2 = []
 with open(filnavn, encoding="utf-8-sig") as fil:
     filinnhold = csv.reader(fil, delimiter=";")
 
-    header = next(filinnhold)
+    tittel = next(filinnhold)
     V = next(filinnhold)
     I = next(filinnhold)
     S = next(filinnhold)
@@ -39,12 +39,10 @@ with open(filnavn, encoding="utf-8-sig") as fil:
             x1.append(l+2)
         if l not in x2:
             x2.append(l-2)
-
-
-    print(ingaatt)
-    print(skilsmisser)
-    
-
+            
 # Tegner grafen
+plt.style.use('seaborn')
 plt.bar(x1,skilsmisser,4)
 plt.bar(x2,ingaatt,4)
+plt.title(tittel[0])
+plt.legend(["Skilsmisser","Ekteskap inngått"])
